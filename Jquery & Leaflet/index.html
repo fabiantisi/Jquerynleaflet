@@ -1,0 +1,179 @@
+<html>
+<head>
+<title>Pemakaian Jquery</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+	 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+	 <style>
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  background-color: #1b1b32;
+  color: #f5f6f7;
+  font-family: Tahoma;
+  font-size: 16px;
+}
+
+h1, p {
+  margin: 1em auto;
+  text-align: center;
+}
+
+form {
+  width: 60vw;
+  max-width: 500px;
+  min-width: 300px;
+  margin: 0 auto;
+  padding-bottom: 2em;
+}
+
+fieldset {
+  border: none;
+  padding: 2rem 0;
+  border-bottom: 3px solid #3b3b4f;
+}
+
+fieldset:last-of-type {
+  border-bottom: none;
+}
+
+label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+input,
+textarea,
+select {
+  margin: 10px 0 0 0;
+  width: 100%;
+  min-height: 2em;
+}
+
+input, textarea {
+  background-color: #0a0a23;
+  border: 1px solid #0a0a23;
+  color: #ffffff;
+}
+
+.inline {
+  width: unset;
+  margin: 0 0.5em 0 0;
+  vertical-align: middle;
+}
+
+input[type="submit"] {
+  display: block;
+  width: 60%;
+  margin: 1em auto;
+  height: 2em;
+  font-size: 1.1rem;
+  background-color: #3b3b4f;
+  border-color: white;
+  min-width: 300px;
+}
+
+input[type="file"] {
+  padding: 1px 2px;
+}
+
+.inline{
+  display: inline; 
+}
+#map { 
+	 height: 600px; 
+	 width: 50%;
+	 margin-left: auto;
+	 margin-right: auto;
+	 
+}
+.map {
+    text-align: right;
+}
+ .map button {
+    margin: 0 auto;
+	width: 100px;
+	height: 30px;
+}
+
+	 </style>
+</head>
+<body>
+<form action="#" class="form-group" id="whatsappForm">
+        <div class="form-group mb-3">
+            <input type="text" id="name" class="form-control" placeholder="Nama Depan" required>
+        </div>
+	<div class="form-group mb-3">
+            <input type="text" id="surename" class="form-control" placeholder="Nama Belakang" required>
+        </div>
+        <div class="form-group mb-3">
+            <input type="email" id="email" class="form-control" placeholder="Email" required>
+        </div>
+		<div class="form-group mb-3">        
+		<label for="kota">Dari Kota Mana Kalian Berasal
+          <select id="kota" name="kota" class="kota">
+            <option value="">(Pilih Salah 1)</option>
+            <option value="1">Kota Bandung</option>
+            <option value="2">Jakarta</option>
+            <option value="3">Purwakarta</option>
+            <option value="4">Dll</option>
+          </select>
+        </label>
+		</div>
+		<div class="form-group mb-3">        
+		<label for="provinsi">Dari Provinsi Mana Kalian Berasal
+          <select id="provinsi" name="provinsi" class="provinsi">
+            <option value="">(Pilih Salah 1)</option>
+            <option value="1">Jawa Barat</option>
+            <option value="2">Jawa Timur</option>
+            <option value="3">Jawa Tengah</option>
+            <option value="4">Dll</option>
+          </select>
+        </label>
+		</div>
+        <div class="form-group mb-3">
+            <textarea id="message" cols="30" rows="5" class="form-control" placeholder="Pesan"></textarea>
+        </div>
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Kirim Whatsapp</button> <button><a href="tempat.html">Alamat Kami</a></button>
+        </div>
+   </form>
+   			 <div id="map"></div>
+	<script>
+	document.getElementById("whatsappForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            var name		= document.getElementById("name").value;
+            var alamat 	= document.getElementById("alamat").value;
+            var umur 		= document.getElementById("umur").value;
+            var message 	= document.getElementById("message").value;
+			var kota 	= document.getElementById("kota").value;
+			var provinsi 	= document.getElementById("provinsi").value;
+            let contact 	= '(+6285759272515)';
+
+            var encodedMessage = encodeURIComponent(
+                "Nama Depan	: " + name + "\n" +
+                "Nama Belakang	: " + surename + "\n" +
+                "Email		: " + email + "\n" +
+                "Pesan		: " + message
+				"Kota		: " + kota
+				"Provinsi	: " provinsi
+            );
+
+            var link;
+
+
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                link = 'whatsapp://send?phone=${contact}&text=${encodedMessage}';
+            } else { 
+                link = 'https://api.whatsapp.com/send?phone=${contact}&text=${encodedMessage}';
+            }
+
+            window.open(link, '_blank');
+}); 	
+</body>
+</html>

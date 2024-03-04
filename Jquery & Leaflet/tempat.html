@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>Pemakaian Jquery</title>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+	 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+	 <style>
+body {
+	width: 100%;
+	height: 100vh;
+	margin: 0;
+	background-color: #1b1b32;
+	color: #f5f6f7;
+	font-family: Tahoma;
+	font-size: 16px;
+}
+
+h1 {
+	margin: 1em auto;
+	text-align: center;
+}
+#map { 
+	height: 500px; 
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	 
+}
+.tomol {
+    text-align: center;
+}
+ .tomol button {
+    margin: 0 auto;
+	width: 100px;
+	height: 30px;
+}
+	 </style>
+</head>
+<body>
+<h1>Jika Anda Ingin Mampir ke gedung nya ada di lokasi ini</h1>
+<div id="map"></div><br>
+<div class="tomol">
+<button><a href="index.html">Kembali</a></button>
+</div>
+	<script>
+		var map = L.map('map').setView([-6.886542, 107.6120931], 20);
+			L.tileLayer('https://api.maptiler.com/maps/basic-v2/{z}/{x}/{y}.png?key=I0Jby6bhRacD7CF8sexe', {
+		attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'
+	}).addTo(map);
+	
+	var popup = L.popup()
+    .setLatLng([-6.886542, 107.6120931])
+    .setContent("Tempat Kami Berada")
+    .openOn(map);
+	</script>
+</body>
+</html>
